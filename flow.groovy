@@ -13,7 +13,7 @@ def productionHttpPort = 8083
 
 stage 'Build'
 node('linux') { // COMPILE AND JUNIT
-    def src = 'https://github.com/cyrille-leclerc/spring-petclinic.git'
+    def src = 'https://github.com/recampbell/spring-petclinic.git'
     // def src = '/Users/cleclerc/git/cyrille-leclerc/spring-petclinic'
     git url: src
 
