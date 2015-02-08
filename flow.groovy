@@ -18,7 +18,7 @@ node('linux') { // COMPILE AND JUNIT
     git url: src
 
     ensureMaven()
-    sh 'mvn clean package'
+    sh 'mvn -o clean package'
     sh 'tar -c -f src.tar src/ pom.xml'
     archive 'src.tar, target/petclinic.war'
     step $class: 'hudson.tasks.junit.JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'
@@ -31,7 +31,7 @@ parallel(qualityAnalysis: {
         unarchive mapping: ['src.tar': '.']
         ensureMaven()
         sh 'tar -x -f src.tar'
-        sh 'echo mvn sonar:sonar'
+        sh 'echo mvn -o sonar:sonar'
         sh 'echo Analysis Running...'
     }
 }, performanceTest: {
@@ -45,7 +45,7 @@ parallel(qualityAnalysis: {
 
         ensureMaven()
         sh 'tar -x -f src.tar'
-        sh 'mvn jmeter:jmeter'
+        sh 'mvn -o jmeter:jmeter'
 
         shutdownApp(perfsCatalinaBase)
     }
